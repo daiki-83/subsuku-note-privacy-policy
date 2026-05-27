@@ -3,111 +3,282 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>プライバシーポリシー - サブスクノート</title>
+  <title>プライバシーポリシー — サブスクノート</title>
   <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #2a2a2a;
+      --text-primary: #f0f0f0;
+      --text-secondary: #888888;
+      --text-muted: #555555;
+      --accent: #ffffff;
+      --accent-dim: #333333;
+    }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      background-color: var(--bg);
+      color: var(--text-primary);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.8;
-      color: #333;
-      background-color: #f9f9f9;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* ─── Header ─── */
     header {
-      background-color: #4a90d9;
-      color: #fff;
-      padding: 32px 20px;
+      border-bottom: 1px solid var(--border);
+      padding: 64px 24px 48px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    header h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+    header::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 300px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    header p {
-      margin-top: 8px;
-      font-size: 0.9rem;
-      opacity: 0.85;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 32px auto;
-      padding: 0 16px 48px;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      padding: 28px 24px;
+    .header-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
       margin-bottom: 20px;
     }
 
-    h2 {
-      font-size: 1.1rem;
+    header h1 {
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
       font-weight: 700;
-      color: #4a90d9;
-      border-left: 4px solid #4a90d9;
-      padding-left: 12px;
-      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+
+    .header-sub {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Main Layout ─── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+
+    .meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 32px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .meta-bar-app {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .meta-bar-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── Section ─── */
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .section-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      min-width: 28px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      flex: 1;
+    }
+
+    .section-body {
+      padding-left: 44px;
     }
 
     p {
-      margin-bottom: 10px;
-      color: #444;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      font-size: 0.92rem;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
     }
 
     ul {
-      padding-left: 20px;
-      margin-bottom: 10px;
+      list-style: none;
+      margin: 12px 0;
     }
 
     li {
-      margin-bottom: 8px;
-      color: #444;
+      display: flex;
+      gap: 10px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    li::before {
+      content: '—';
+      color: var(--text-muted);
+      flex-shrink: 0;
     }
 
     a {
-      color: #4a90d9;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
       word-break: break-all;
     }
 
     a:hover {
-      text-decoration: underline;
+      border-color: var(--text-primary);
     }
 
-    .updated {
-      text-align: right;
-      font-size: 0.82rem;
-      color: #888;
-      margin-bottom: 24px;
+    /* ─── Callout Block ─── */
+    .callout {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin: 16px 0;
     }
 
+    .callout p {
+      margin: 0;
+      font-size: 0.87rem;
+    }
+
+    /* ─── Tag ─── */
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 56px 0;
+    }
+
+    /* ─── Footer ─── */
     footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
       text-align: center;
-      font-size: 0.8rem;
-      color: #aaa;
-      padding: 24px 16px;
     }
 
+    .footer-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    footer a {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-bottom-color: var(--text-muted);
+    }
+
+    /* ─── Responsive ─── */
     @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.3rem;
+      header {
+        padding: 48px 20px 36px;
       }
-      .card {
-        padding: 20px 16px;
+      main {
+        padding: 40px 20px 72px;
       }
-      h2 {
-        font-size: 1rem;
+      .section-body {
+        padding-left: 0;
+      }
+      .section-header {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
@@ -115,122 +286,159 @@
 <body>
 
 <header>
+  <div class="header-label">Legal Document</div>
   <h1>プライバシーポリシー</h1>
-  <p>サブスクノート</p>
+  <p class="header-sub">サブスクノート &nbsp;/&nbsp; Privacy Policy</p>
 </header>
 
 <main>
-  <p class="updated">最終更新日：2026年5月27日</p>
 
-  <div class="card">
-    <h2>1. はじめに</h2>
-    <p>
-      「サブスクノート」（以下「本アプリ」）をご利用いただきありがとうございます。
-      本アプリの開発者（以下「当方」）は、ユーザーのプライバシーを尊重し、個人情報の適切な取り扱いに努めています。
-      本プライバシーポリシーは、本アプリにおける情報の収集・利用・管理方針についてご説明するものです。
-    </p>
+  <div class="meta-bar">
+    <span class="meta-bar-app">Subsuku-Note</span>
+    <span class="meta-bar-date">最終更新：2026年5月27日</span>
   </div>
 
-  <div class="card">
-    <h2>2. 収集する情報について</h2>
-    <p>
-      当方は、本アプリを通じてユーザーの氏名・メールアドレス・電話番号などの個人を直接特定できる情報を収集することは<strong>ありません</strong>。
-    </p>
-    <p>ただし、以下のサードパーティサービスを通じて、技術的な情報が自動的に収集される場合があります。</p>
-    <ul>
-      <li>広告の配信最適化・パフォーマンス計測のための広告識別子（広告ID / IDFA）</li>
-      <li>アプリの利用状況・クラッシュレポートなどの診断情報</li>
-      <li>デバイスの種別・OSバージョン・言語設定などの技術情報</li>
-    </ul>
+  <!-- 1 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">はじめに</h2>
+    </div>
+    <div class="section-body">
+      <p>「サブスクノート」（以下「本アプリ」）をご利用いただきありがとうございます。本アプリの開発者（以下「当方」）は、ユーザーのプライバシーを尊重し、個人情報の適切な取り扱いに努めています。</p>
+      <p>本プライバシーポリシーは、本アプリにおける情報の収集・利用・管理方針についてご説明するものです。</p>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>3. 広告について（バージョン2.0以降）</h2>
-    <p>
-      本アプリはバージョン2.0より、Google LLC が提供する広告配信サービス「<strong>Google AdMob</strong>」を導入しています。
-      AdMob は、広告識別子（Android 広告 ID）を使用して、ユーザーの興味・関心に基づいたパーソナライズ広告を表示する場合があります。
-    </p>
-    <ul>
-      <li>収集データ：広告ID、おおよその位置情報（国・地域レベル）、アプリの利用状況、デバイス情報</li>
-      <li>利用目的：広告の表示・最適化、不正防止、利用統計の集計</li>
-    </ul>
-    <p>
-      Google のプライバシーポリシーについては以下をご確認ください。<br>
-      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>
-    </p>
-    <p>
-      広告IDのリセットやパーソナライズ広告のオプトアウトは、お使いのデバイスの設定から行うことができます。
-    </p>
-    <ul>
-      <li>Android：設定 → Google → 広告 → 「広告IDを削除する」または「広告のパーソナライズを無効にする」</li>
-    </ul>
+  <!-- 2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">収集する情報について</h2>
+    </div>
+    <div class="section-body">
+      <div class="callout">
+        <p>当方は、本アプリを通じてユーザーの氏名・メールアドレス・電話番号などの個人を直接特定できる情報を収集することは<strong style="color: var(--text-primary);">ありません。</strong></p>
+      </div>
+      <p>ただし、以下のサードパーティサービスを通じて、技術的な情報が自動的に収集される場合があります。</p>
+      <ul>
+        <li>広告の配信最適化・パフォーマンス計測のための広告識別子（広告 ID / IDFA）</li>
+        <li>アプリの利用状況・クラッシュレポートなどの診断情報</li>
+        <li>デバイスの種別・OSバージョン・言語設定などの技術情報</li>
+      </ul>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>4. アナリティクスについて</h2>
-    <p>
-      本アプリは、Google LLC が提供する「<strong>Firebase Analytics（Google Analytics for Firebase）</strong>」を使用してアプリの利用状況を分析しています。
-      収集されたデータは、機能改善やユーザー体験の向上を目的として利用されます。
-    </p>
-    <ul>
-      <li>収集データ：起動回数、画面遷移、操作イベント、クラッシュ情報、デバイス情報</li>
-      <li>利用目的：バグ修正・機能改善・UX最適化</li>
-    </ul>
-    <p>
-      Firebase のプライバシーポリシーについては以下をご確認ください。<br>
-      <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">https://firebase.google.com/support/privacy</a>
-    </p>
+  <!-- 3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">広告について（バージョン 2.0 以降）</h2>
+    </div>
+    <div class="section-body">
+      <span class="tag">Google AdMob</span>
+      <p>本アプリはバージョン 2.0 より、Google LLC が提供する広告配信サービス「Google AdMob」を導入しています。AdMob は、広告識別子（Android 広告 ID）を使用して、ユーザーの興味・関心に基づいたパーソナライズ広告を表示する場合があります。</p>
+      <ul>
+        <li>収集データ：広告 ID、おおよその位置情報（国・地域レベル）、アプリの利用状況、デバイス情報</li>
+        <li>利用目的：広告の表示・最適化、不正防止、利用統計の集計</li>
+      </ul>
+      <p>Google のプライバシーポリシー：<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></p>
+      <p>広告 ID のリセットやパーソナライズ広告のオプトアウトは、デバイスの設定から行えます。</p>
+      <ul>
+        <li>Android：設定 → Google → 広告 → 「広告 ID を削除する」または「広告のパーソナライズを無効にする」</li>
+      </ul>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>5. データの第三者提供について</h2>
-    <p>
-      当方は、以下の場合を除き、収集したデータを第三者に販売・提供・開示することはありません。
-    </p>
-    <ul>
-      <li>ユーザーの同意がある場合</li>
-      <li>法令に基づき開示が求められる場合</li>
-      <li>上記3・4項に記載のサードパーティサービス（Google LLC）によるデータ処理（各社のプライバシーポリシーに従い処理されます）</li>
-    </ul>
+  <!-- 4 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">アナリティクスについて</h2>
+    </div>
+    <div class="section-body">
+      <span class="tag">Firebase Analytics</span>
+      <p>本アプリは、Google LLC が提供する「Firebase Analytics（Google Analytics for Firebase）」を使用してアプリの利用状況を分析しています。収集されたデータは、機能改善やユーザー体験の向上を目的として利用されます。</p>
+      <ul>
+        <li>収集データ：起動回数、画面遷移、操作イベント、クラッシュ情報、デバイス情報</li>
+        <li>利用目的：バグ修正・機能改善・UX 最適化</li>
+      </ul>
+      <p>Firebase のプライバシーポリシー：<br><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">https://firebase.google.com/support/privacy</a></p>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>6. データの保存・管理</h2>
-    <p>
-      本アプリに入力されたサブスクリプション情報（サービス名・金額・更新日など）は、ユーザーのデバイス内にのみ保存されます。
-      当方のサーバーにはアップロードされません。
-    </p>
+  <!-- 5 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">データの第三者提供について</h2>
+    </div>
+    <div class="section-body">
+      <p>当方は、以下の場合を除き、収集したデータを第三者に販売・提供・開示することはありません。</p>
+      <ul>
+        <li>ユーザーの同意がある場合</li>
+        <li>法令に基づき開示が求められる場合</li>
+        <li>上記 03・04 項に記載のサードパーティサービス（Google LLC）によるデータ処理</li>
+      </ul>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>7. 子どものプライバシーについて</h2>
-    <p>
-      本アプリは13歳未満の子どもを対象としておらず、意図的に13歳未満の子どもから個人情報を収集することはありません。
-      万一、13歳未満の子どもに関する情報が収集されていると判明した場合は、速やかに削除対応を行います。
-    </p>
+  <!-- 6 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">データの保存・管理</h2>
+    </div>
+    <div class="section-body">
+      <div class="callout">
+        <p>本アプリに入力されたサブスクリプション情報（サービス名・金額・更新日など）は、ユーザーのデバイス内にのみ保存されます。当方のサーバーへはアップロードされません。</p>
+      </div>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>8. プライバシーポリシーの変更について</h2>
-    <p>
-      当方は、法令の改正やサービス内容の変更に伴い、本プライバシーポリシーを予告なく変更する場合があります。
-      変更後のポリシーは本ページに掲載した時点から効力を生じます。
-      定期的にご確認いただくことをお勧めします。
-    </p>
+  <!-- 7 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">子どものプライバシーについて</h2>
+    </div>
+    <div class="section-body">
+      <p>本アプリは 13 歳未満の子どもを対象としておらず、意図的に 13 歳未満の子どもから個人情報を収集することはありません。万一、13 歳未満の子どもに関する情報が収集されていると判明した場合は、速やかに削除対応を行います。</p>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>9. お問い合わせ</h2>
-    <p>本プライバシーポリシーに関するご質問・ご意見は、以下の連絡先までお問い合わせください。</p>
-    <p>
-      メールアドレス：<a href="mailto:rokushino@aps.bbiq.jp">rokushino@aps.bbiq.jp</a>
-    </p>
+  <!-- 8 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2 class="section-title">プライバシーポリシーの変更について</h2>
+    </div>
+    <div class="section-body">
+      <p>当方は、法令の改正やサービス内容の変更に伴い、本プライバシーポリシーを予告なく変更する場合があります。変更後のポリシーは本ページに掲載した時点から効力を生じます。定期的にご確認いただくことをお勧めします。</p>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2 class="section-title">お問い合わせ</h2>
+    </div>
+    <div class="section-body">
+      <p>本プライバシーポリシーに関するご質問・ご意見は、以下の連絡先までお問い合わせください。</p>
+      <div class="callout">
+        <p>Email&nbsp;&nbsp;<a href="mailto:rokushino@aps.bbiq.jp">rokushino@aps.bbiq.jp</a></p>
+      </div>
+    </div>
   </div>
 
 </main>
 
 <footer>
-  <p>&copy; 2026 サブスクノート. All rights reserved.</p>
+  <div class="footer-inner">
+    <p>&copy; 2026 サブスクノート</p>
+    <p>All rights reserved.</p>
+  </div>
 </footer>
 
 </body>
